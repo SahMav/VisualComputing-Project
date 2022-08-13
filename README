@@ -1,0 +1,39 @@
+# Automated Monitoring of Social Distancing with YOLOv3
+
+Course Project for Fundamentals of Visual Computing
+
+## Requirements
+- torch
+- cv2
+- numpy
+- pickle
+- pandas
+
+## How to run
+
+The weight files are included in the project zip folder. 
+In order to run with the input video included (pedestrian.mp4), simply run the vidoe.py file.
+
+
+## How to calibrate
+
+There is a video of the calibration process included in the project folder. If my explanation is too confusing just watch the video :))
+
+After running the file video.py, the first frame of the video will show in a window.
+For calibrating the camera, start by clicking on the four corners of the perspective area ordering  lower-left, lower-right, upper-right, upper-left. after clicking on each corner a yellow circle will show on the spot.
+after the first 4 points click again on the lower left corner, now a red circle will appear where you clicked. In the horizontal direction (one the line connecting the first 2 yellow points) click as far from the red point as you think the horizontal social distance must be. In the vertical direction do the same to show how much the vertical social distance limit must be. (That adds up to 4 yellow circles and 3 red circles). Now that all 7 points are visualized, click once more for the real-time detection to start.
+
+## Outputs
+
+You can see the violators with red rectangles and non-violators with green rectangles. After the code is done running there will be two videos, one bird's_view_test.mp4 which shows the pedestrians from top-down view and one marked_video.mp4 which is the visualized video. 
+
+Since I was running on the CPU the fps rate was too low so in order to make the output closer to real-time, for this video I process every 20 frames. You can change this number in the video.py file by changing the value 20 in the code below.
+
+```python
+        while skip % 20 != 0:
+            ret, frame = cap.read()
+            skip += 1
+```
+
+The frames per second for the output videos are different values and not the original fps of the video because I only needed them for observing the detections.
+
